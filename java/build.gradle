@@ -1,9 +1,18 @@
 plugins {
-    id 'java'
+    id 'application'
 }
-
 group 'org.example'
 version '1.0-SNAPSHOT'
+
+apply plugin : "java"
+
+ext {
+    javaMainClass = "sha512.Sha512Test"
+}
+
+application {
+    mainClassName = javaMainClass
+}
 
 repositories {
     mavenCentral()
@@ -18,3 +27,4 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+

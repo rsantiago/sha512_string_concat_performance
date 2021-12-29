@@ -1,31 +1,26 @@
-
-use std::slice::from_raw_parts;
 use sha2::{Sha512, Digest};
 use std::time::{SystemTime, UNIX_EPOCH};
-use std::ffi::OsStr;
-use std::os::unix::ffi::OsStrExt;
-use std::slice;
 
 fn main() {
     string_pusher_x20();
 }
 
 fn string_pusher_x20() {
-    (1..20).for_each(|_| string_pusher());
+    (0..20).for_each(|_| string_pusher());
 }
 
 fn string_pusher() {
     let start = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_millis();
-    let mysamplestring = "myBaseString".to_string();
+    let my_sample_string = "myBaseString";
     let mut string_buffer = String::with_capacity(25);
     let iterations = 1000000;
 
     let mut i = 0;
     while i < iterations {
         string_buffer.clear();
-        string_buffer.push_str(&mysamplestring);
+        string_buffer.push_str(my_sample_string);
         string_buffer.append(i);
-        Sha512::digest(string_buffer.as_bytes());
+        let _hash = Sha512::digest(string_buffer.as_bytes());
         //println!("Result: {:x}", _hash);
         i += 1; // go to next iteration
     }

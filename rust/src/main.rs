@@ -2,7 +2,25 @@ use sha2::{Sha512, Digest};
 use std::time::{SystemTime, UNIX_EPOCH};
 
 fn main() {
-    string_pusher_x20();
+    just_hash_it_x20()
+    //string_pusher_x20()
+}
+fn just_hash_it_x20() {
+    (0..20).for_each(|_| justHashIt());
+}
+
+fn justHashIt() {
+    let start = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_millis();
+    let my_sample_string = "myBaseString";
+    let how_many = 2000000;
+    let mut i=0;
+    while i< how_many {
+        let _hash = Sha512::digest(my_sample_string.as_bytes());
+        //println!("Result: {:x}", _hash);
+        i+=1;
+    }
+    let end = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_millis();
+    println!("Just hash it took {} milliseconds for {} cycles", end - start, how_many);
 }
 
 fn string_pusher_x20() {
